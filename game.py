@@ -5,6 +5,7 @@ import pygame
 
 # First party
 from .Alexandre import Board
+from .Elyesse import Gamer
 from .background import Background
 from .exception import GameOver, EnnemyEncounter
 from .state import State
@@ -36,6 +37,9 @@ class Game:
         self._board = Board(screen = self._screen,
                             nb_lines = self._height,
                             nb_cols = self._width)
+        
+        # Create the player
+        self._gamer = Gamer(x = self._width//2, self._height//2, self._hp)
 
         # Create background
         self._background = Background(height = self._height,

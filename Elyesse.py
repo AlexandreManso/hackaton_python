@@ -1,8 +1,9 @@
 from .gameobject import GameObject
 from .direction import Dir
 from .exception import EnnemyEncounter, GameOver
+from .Alexandre import Subject, Observer
 
-class gamer(GameObject, Subject, Observer) :
+class Gamer(GameObject, Subject, Observer) :
 
     def __init__(self,x,y, hp, money, speed, dir):
         self._hp = hp
@@ -72,9 +73,9 @@ class object(GameObject) :
         self.value = v
     def potion(object):
         if object.property == "health":
-            gamer.hp = min(5,gamer.hp+object.value)
+            Gamer.hp = min(5,Gamer.hp+object.value)
     def money(object):
-        gamer.money += object.value
+        Gamer.money += object.value
     def draw(object):
         return
 
