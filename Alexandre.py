@@ -3,7 +3,7 @@
 #classes et sous classes d'objet avec attribut draw
 
 import pygame
-
+from .Antonin/gameobjects import GameObject
 
 class Observer:
     def_init_(self):
@@ -40,7 +40,8 @@ class Subject:
 
 
 class Board(Subject, Observer):
-    def_init_(self, screen: pygame.Surface, nb_lines : int, nb_cols : int):
+
+    def _init_(self, screen: pygame.Surface, nb_lines : int, nb_cols : int):
         super()._init_()
         self._screen = screen
         self._nb_lines = nb_lines
