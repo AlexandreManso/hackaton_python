@@ -1,0 +1,13 @@
+-name: ennemy1
+ position_x:
+ position_y:
+ hp:
+ sprite : "ennemy1_spritefile_path"
+-name: obstacle1
+ position_x:
+ position_y:
+ lenght:
+ width:
+ sprite:
+-name : background
+ texture:
