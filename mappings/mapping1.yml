@@ -1,13 +1,119 @@
+-name: player
+orientation: up
+position_x: 720
+position_y: 520
+
+
 -name: ennemy1
- position_x:
- position_y:
- hp:
+ position_x: 80
+ position_y: 200
+ hp: 100
  sprite : "ennemy1_spritefile_path"
--name: obstacle1
- position_x:
- position_y:
- lenght:
- width:
- sprite:
+ type : "ennemy"
+
+-name: ennemy2
+ position_x: 120
+ position_y: 920
+ hp: 5000
+ sprite : "ennemy2_spritefile_path"
+ type : "ennemy"
+
+-name: ennemy3
+ position_x: 360
+ position_y: 1040
+ hp: 90
+ sprite : "ennemy3_spritefile_path"
+ type : "ennemy"
+
+-name: wall1
+ position_x: 0
+ position_y: 0
+ lenght: 440
+ width: 20
+ sprite: "wallspritepath"
+
+-name: wall2
+ position_x: 440
+ position_y: 0
+ lenght: 360
+ width: 400
+ sprite: "wallspritepath"
+
+-name: wall3
+ position_x: 0
+ position_y: 120
+ lenght: 40
+ width: 1080
+ sprite: "wallspritepath"
+
+-name: wall4
+ position_x: 40
+ position_y: 120
+ lenght: 320
+ width: 40
+ sprite: "wallspritepath"
+
+-name: wall5
+ position_x: 40
+ position_y: 240
+ lenght: 320
+ width: 40
+ sprite: "wallspritepath"
+
+-name: wall6
+ position_x: 120
+ position_y: 360
+ lenght: 320
+ width: 40
+ sprite: "wallspritepath"
+
+-name: wall7
+ position_x: 40
+ position_y: 1160
+ lenght: 760
+ width: 40
+ sprite: "wallspritepath"
+
+-name: wall8
+ position_x: 280
+ position_y: 680
+ lenght: 40
+ width: 480
+ sprite: "wallspritepath"
+
+-name: wall9
+ position_x: 480
+ position_y: 680
+ lenght: 280
+ width: 40
+ sprite: "wallspritepath"
+
+-name: wall10
+ position_x: 720
+ position_y: 400
+ lenght: 40
+ width: 120
+ sprite: "wallspritepath"
+
+-name: wall11
+ position_x: 720
+ position_y: 560
+ lenght: 40
+ width: 600
+ sprite: "wallspritepath"
+
+-name: wall12
+ position_x: 40
+ position_y: 600
+ lenght: 200
+ width: 40
+ sprite: "wallspritepath"
+
+-name: object1
+position_x: 40
+position_y: 200
+sprite: "file_path_object"
+
+ 
 -name : background
- texture:
+ texture: "file_path-texture"
