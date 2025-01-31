@@ -67,7 +67,11 @@ class Board(Subject, Observer):
     def notify_object_moved(self, obj):
         #DETECT board exit à faire 
         obj.notify_out_of_board()
-
+        y,x = obj.position()
+        if((x == 0) and (40 <= y <120)):
+            return("exit_up")
+        if((x ==760) and (y==520)):
+            return("exit_down")
         #detect collisions
         for o in self.collides(obj):
             obj.notify_collision(o)
