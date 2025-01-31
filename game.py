@@ -6,19 +6,21 @@ import pygame
 # First party
 from .Alexandre import Board
 from .background import Background
-from .exception import GameOver
+from .exception import GameOver, EnnemyEncounter
 from .state import State
+from .direction import Dir
 
 
 class Game:
     """The main class of the game."""
 
     def __init__(self, width: int, height: int,
-                 fps: int) -> None:
+                 fps: int, tilesize) -> None:
         """Object initialization."""
         self._width = width
         self._height = height
         self._fps = fps
+        self._tilesize = tilesize
 
     def _init(self) -> None:
         """Initialize the game."""
@@ -66,6 +68,7 @@ class Game:
                     self._process_play_event(event)
                 case State.PLAY_FIGHT :
                     pass
+            
             # Closing window (Mouse click on cross icon or OS keyboard shortcut)
             if event.type == pygame.QUIT:
                 self._state = State.QUIT
@@ -104,6 +107,9 @@ class Game:
 
             except GameOver:
                 self._state=State.GAMEOVER
+            
+            except EnnemyEncounter:
+                self._state=State.PLAY_FIGHT 
 
             # Display
             pygame.display.update()

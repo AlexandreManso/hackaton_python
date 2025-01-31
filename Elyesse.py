@@ -1,5 +1,6 @@
 from .gameobject import GameObject
 from .direction import Dir
+from .exception import EnnemyEncounter, GameOver
 
 class gamer(GameObject, Subject, Observer) :
 
@@ -38,7 +39,26 @@ class gamer(GameObject, Subject, Observer) :
     
     def move(self):
         """move the player."""
+        
+        #Apply movement
         self._position += self._dir
+
+        # Notify movement
+        for obs in self.observers:
+            obs.notify_object_moved(self)
+
+    def notify_collision(self, obj):
+        """What to do if a collision is detected."""
+        
+        #Collided with obstacle
+        if obj.is_obstacle:
+            self._position -= self._dir
+        
+        #Collided with ennemy
+        if obj.is_enemy:
+            raise EnnemyEncounter
+
+
 
 
 
