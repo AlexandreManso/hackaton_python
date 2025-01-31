@@ -27,9 +27,9 @@ class GameObject(Subject, Observer, abc.ABC):
         return False
 
     def is_ennemy(self):
-        #tell if object is ennemy
+        # tell if object is ennemy
         return False
-    
+
     def is_wall(self):
-        #tell if object is wall
+        # tell if object is wall
         return False

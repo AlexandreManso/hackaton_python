@@ -18,8 +18,7 @@ from .state import State
 class Game:
     """The main class of the game."""
 
-    def __init__(self, width: int, height: int,
-                 fps: int) -> None:
+    def __init__(self, width: int, height: int, fps: int) -> None:
         """Object initialization."""
         self._width = width
         self._height = height
@@ -28,26 +27,24 @@ class Game:
     def _init(self) -> None:
         """Initialize the game."""
         # Create a display screen
-        screen_size = (self._width,
-                       self._height)
+        screen_size = (self._width, self._height)
         self._screen = pygame.display.set_mode(screen_size)
 
         # Create the clock
         self._clock = pygame.time.Clock()
 
         # Create the main board
-        self._board = Board(screen = self._screen,
-                            nb_lines = self._height,
-                            nb_cols = self._width)
+        self._board = Board(
+            screen=self._screen, nb_lines=self._height, nb_cols=self._width
+        )
 
         # Create background
-        self._background = Background(height = self._height,
-                                          width = self._width)
+        self._background = Background(height=self._height, width=self._width)
         self._board.add_object(self._background)
 
-    def _process_play_event(self, event : pygame.event.Event) -> None:
+    def _process_play_event(self, event: pygame.event.Event) -> None:
         """Change the direction of the snake if needed."""
-        if event.type==pygame.KEYDOWN :
+        if event.type == pygame.KEYDOWN:
             match event.key:
                 case pygame.K_UP:
                     self._snake.dir = Dir.UP
@@ -63,20 +60,20 @@ class Game:
         # Loop on all events
         for event in pygame.event.get():
 
-            match self._state :
-                case State.MENU :
+            match self._state:
+                case State.MENU:
                     pass
-                case State.PLAY_ROAM :
+                case State.PLAY_ROAM:
                     self._process_play_event(event)
-                case State.PLAY_FIGHT :
+                case State.PLAY_FIGHT:
                     pass
             # Closing window (Mouse click on cross icon or OS keyboard shortcut)
             if event.type == pygame.QUIT:
                 self._state = State.QUIT
 
             # Key press
-            if event.type == pygame.KEYDOWN and event.key==pygame.K_SPACE:
-                self._state= State.PLAY
+            if event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
+                self._state = State.PLAY
 
                 # Quit
                 match event.key:
@@ -102,46 +99,40 @@ class Game:
             self._process_events()
 
             # Update objects
-            try :
-                if self._state==State.PLAY_ROAM :
+            try:
+                if self._state == State.PLAY_ROAM:
                     self._.move()
 
             except GameOver:
-                self._state=State.GAMEOVER
-                countdown=self._fps
-
-
+                self._state = State.GAMEOVER
+                countdown = self._fps
 
             # Draw
             self._board.draw()
-            match self._state :
-                case State.GAMEOVER :
+            match self._state:
+                case State.GAMEOVER:
 
-                    #Draw gameover for a given timespan
+                    # Draw gameover for a given timespan
                     self._drawgameover()
-                    countdown-=1
-                    if countdown==0 :
+                    countdown -= 1
+                    if countdown == 0:
 
-                        #Replace Snake to a correct position
-                        score=self._snake.score
+                        # Replace Snake to a correct position
+                        score = self._snake.score
                         self._reset_snake()
 
-                        #Manage score
-                        if self._scores.is_highscore(score) is True :
-                            self._new_high_score=Score(name="", score=score)
+                        # Manage score
+                        if self._scores.is_highscore(score) is True:
+                            self._new_high_score = Score(name="", score=score)
                             self._scores.add_score(self._new_high_score)
-                            self._state= State.INPUT_NAME
-                        else :
-                            self._state=State.SCORES
+                            self._state = State.INPUT_NAME
+                        else:
+                            self._state = State.SCORES
                 case State.SCORES | State.INPUT_NAME:
                     self._draw_scores()
 
             # Display
             pygame.display.update()
 
-
-
         # Terminate pygame
         pygame.quit()
-
-        

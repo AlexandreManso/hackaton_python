@@ -21,20 +21,19 @@ class Dir(enum.Enum):
     def y(self) -> int:
         """Line index (starts at 0)."""
         return self.value[1]
-    
-    def __add__(self, pos: tuple[int,int]):
+
+    def __add__(self, pos: tuple[int, int]):
         """Move forward in direction dir."""
         if isinstance(pos, tuple):
-            new_pos = (pos[0]+ self.x, pos[1] + self.y)
+            new_pos = (pos[0] + self.x, pos[1] + self.y)
             return new_pos
         msg = f"Wrong object type {type(pos)}."
         raise ValueError(msg)
-    
-    def __sub__(self, pos : tuple[int,int]):
+
+    def __sub__(self, pos: tuple[int, int]):
         """Move backward in direction dir."""
         if isinstance(pos, tuple):
-            new_pos = (pos[0]- self.x, pos[1]-self.y)
+            new_pos = (pos[0] - self.x, pos[1] - self.y)
             return new_pos
         msg = f"Wrong object type {type(pos)}."
         raise ValueError(msg)
-    
