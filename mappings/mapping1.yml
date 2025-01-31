@@ -114,6 +114,10 @@ position_x: 40
 position_y: 200
 sprite: "file_path_object"
 
+name: object2
+position_x: 640
+position_y: 840
+
  
 -name : background
  texture: "file_path-texture"
