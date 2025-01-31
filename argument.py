@@ -8,6 +8,9 @@ DEFAULT_MAPPING = {"(1,1)" : Path("mappings/mapping1.yml")}
 DEFAULT_HEIGHT = 800
 DEFAULT_WIDTH = 1200
 DEFAULT_TILESIZE = 40
+DEFAULT_FPS = 15
+DEFAULT_HP = 100
+
 
 
 
@@ -32,6 +35,14 @@ def read_args() -> argparse.Namespace:
                         help = "Size for a tile.",
                         default = DEFAULT_TILESIZE,
                         type= int)
+    parser.add_argument("--FRAMERATE", "-fps",
+                        help= "Frame rate for the game.",
+                        default = DEFAULT_FPS, 
+                        type = int)
+    parser.add_argument("--HEALTH", "-hp",
+                        help = "Default health for the player.",
+                        default = DEFAULT_HP,
+                        type = int)
     args = parser.parse_args()
     return args
 
