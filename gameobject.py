@@ -25,3 +25,11 @@ class GameObject(Subject, Observer, abc.ABC):
     def is_background(self) -> bool:
         """Tell if this object is a background object."""
         return False
+
+    def is_ennemy(self):
+        #tell if object is ennemy
+        return False
+    
+    def is_wall(self):
+        #tell if object is wall
+        return False
