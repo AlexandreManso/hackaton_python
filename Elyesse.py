@@ -9,7 +9,7 @@ class Gamer(GameObject, Subject, Observer):
     def __init__(self, x, y, hp, dir):
         self._hp = hp
         self._inventory = []
-        self._position = (x, y)
+        self._position = (y,x)
         self._dir = dir
 
     @property

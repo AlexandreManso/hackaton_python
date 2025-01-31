@@ -40,13 +40,18 @@ class Game:
         self._board = Board(screen = self._screen,
                             nb_lines = self._height,
                             nb_cols = self._width)
+        
         # Read the first room
         self._room1 = map["(1,1)"]
         try :
+            self._data_room1 = {}
             with self._room1.open("r") as f:
                 for dic in yaml.safe_load(f):
-                    
-        
+                    name = dic.get("name")
+                    if name:
+                        self._data_room1[name] = dic
+
+
         except (FileNotFoundError, yaml.YAMLError) as e:
             print(f"Error {e} while loading file")
 
@@ -54,15 +59,19 @@ class Game:
 
         # Load the next accessible rooms
         
-        # to do
+        
 
         # Create the player
-        self._gamer = Gamer(x = self._width//2, y=self._height//2, hp=self._hp)
-
+        self._gamer = Gamer(x=self._data_room1["player"]["position_x"], 
+                            y=self._data_room1["player"]["position_y"], 
+                            hp=self._hp)
+        self._board.add_object(self._gamer)
         # Create background
         self._background = Background(height = self._height,
                                           width = self._width)
         self._board.add_object(self._background)
+
+        # Create objects
 
     def _process_play_event(self, event : pygame.event.Event) -> None:
         """Change the direction of the snake if needed."""
@@ -70,13 +79,13 @@ class Game:
 
             match event.key:
                 case pygame.K_UP:
-                    self._snake.dir = Dir.UP
+                    self._gamer.dir = Dir.UP
                 case pygame.K_DOWN:
-                    self._snake.dir = Dir.DOWN
+                    self._gamer.dir = Dir.DOWN
                 case pygame.K_LEFT:
-                    self._snake.dir = Dir.LEFT
+                    self._gamer.dir = Dir.LEFT
                 case pygame.K_RIGHT:
-                    self._snake.dir = Dir.RIGHT
+                    self._gamer.dir = Dir.RIGHT
 
     def _process_events(self) -> None:
         """Process pygame events."""
