@@ -3,7 +3,7 @@
 #classes et sous classes d'objet avec attribut draw
 
 import pygame
-from .Antonin/gameobjects import GameObject
+from .gameobject import GameObject
 
 
 class Board:

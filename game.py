@@ -1,17 +1,12 @@
 # ruff: noqa: D100,S311
 
-# Third party
-import importlib.resources
-import sys
-from pathlib import Path
 
 import pygame
 
 # First party
-from .board import Board
+from .Alexandre import Board
 from .background import Background
-from .dir import Dir
-from .exceptions import GameOver
+from .exception import GameOver
 from .state import State
 
 
@@ -48,6 +43,7 @@ class Game:
     def _process_play_event(self, event : pygame.event.Event) -> None:
         """Change the direction of the snake if needed."""
         if event.type==pygame.KEYDOWN :
+
             match event.key:
                 case pygame.K_UP:
                     self._snake.dir = Dir.UP
@@ -104,37 +100,10 @@ class Game:
             # Update objects
             try :
                 if self._state==State.PLAY_ROAM :
-                    self._.move()
+                    self._gamer.move()
 
             except GameOver:
                 self._state=State.GAMEOVER
-                countdown=self._fps
-
-
-
-            # Draw
-            self._board.draw()
-            match self._state :
-                case State.GAMEOVER :
-
-                    #Draw gameover for a given timespan
-                    self._drawgameover()
-                    countdown-=1
-                    if countdown==0 :
-
-                        #Replace Snake to a correct position
-                        score=self._snake.score
-                        self._reset_snake()
-
-                        #Manage score
-                        if self._scores.is_highscore(score) is True :
-                            self._new_high_score=Score(name="", score=score)
-                            self._scores.add_score(self._new_high_score)
-                            self._state= State.INPUT_NAME
-                        else :
-                            self._state=State.SCORES
-                case State.SCORES | State.INPUT_NAME:
-                    self._draw_scores()
 
             # Display
             pygame.display.update()
