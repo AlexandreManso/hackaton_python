@@ -41,11 +41,12 @@ class Subject:
 
 class Board(Subject, Observer):
 
-    def _init_(self, screen: pygame.Surface, nb_lines : int, nb_cols : int):
+    def _init_(self, screen: pygame.Surface, nb_lines : int, nb_cols : int, tile_size : int):
         super()._init_()
         self._screen = screen
         self._nb_lines = nb_lines
         self._nb_cols = nb_cols
+        self._tile_size = tile_size
         self._objects: list[GameObject] = []
 
     def add(self, obj:GameObject):
