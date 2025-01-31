@@ -12,6 +12,13 @@ class GameOver(GameException):
         """Object initialization."""
         super().__init__("Game over!")
 
+class EnnemyEncounter(GameException):
+    """Exception Class used to signal ennemy encounters."""
+
+    def __init__(self) -> None:
+        """Object initialization."""
+        super().__init__("Encountered ennemy!")
+
 class GameError(Exception):
     """Exception super-class for all Snake errors."""
 

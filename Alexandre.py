@@ -3,10 +3,10 @@
 #classes et sous classes d'objet avec attribut draw
 
 import pygame
-from .Antonin/gameobjects import GameObject
+from .gameobject import GameObject
 
 class Observer:
-    def_init_(self):
+    def _init_(self):
         super()._init_()
 
     def notify_object_moved(self, obj):
@@ -18,6 +18,7 @@ class Observer:
     def notify_out_of_board(self,obj):
         #notify
         
+
 class Subject:
 
     def __init__(self) -> None:
@@ -49,7 +50,7 @@ class Board(Subject, Observer):
         self._tile_size = tile_size
         self._objects: list[GameObject] = []
 
-    def add(self, obj:GameObject):
+    def add_object(self, obj:GameObject):
         if obj not in self._objects:
             self._objects.append(obj)
             obj.attach_obs(self)
