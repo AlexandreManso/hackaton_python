@@ -1,9 +1,11 @@
 # ruff: noqa: D100,S311
 
-
+# Third Party imports
 import pygame
+from pathlib import Path
+import yaml
 
-# First party
+# Custom imports
 from .Alexandre import Board
 from .Elyesse import Gamer
 from .background import Background
@@ -16,12 +18,13 @@ class Game:
     """The main class of the game."""
 
     def __init__(self, width: int, height: int,
-                 fps: int, tilesize) -> None:
+                 fps: int, tilesize: int, map : dict) -> None:
         """Object initialization."""
         self._width = width
         self._height = height
         self._fps = fps
         self._tilesize = tilesize
+        self._map = map
 
     def _init(self) -> None:
         """Initialize the game."""
@@ -37,9 +40,24 @@ class Game:
         self._board = Board(screen = self._screen,
                             nb_lines = self._height,
                             nb_cols = self._width)
+        # Read the first room
+        self._room1 = map["(1,1)"]
+        try :
+            with self._room1.open("r") as f:
+                for dic in yaml.safe_load(f):
+                    
         
+        except (FileNotFoundError, yaml.YAMLError) as e:
+            print(f"Error {e} while loading file")
+
+
+
+        # Load the next accessible rooms
+        
+        # to do
+
         # Create the player
-        self._gamer = Gamer(x = self._width//2, self._height//2, self._hp)
+        self._gamer = Gamer(x = self._width//2, y=self._height//2, hp=self._hp)
 
         # Create background
         self._background = Background(height = self._height,
