@@ -1,6 +1,11 @@
 import argparse
+from pathlib import Path
+
+
 
 #Global constants
+DEFAULT_MAPPING = Path("mapping.yml")
+DEFAULT_
 
 
 def read_args() -> argparse.Namespace:
