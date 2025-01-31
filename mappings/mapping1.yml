@@ -4,26 +4,26 @@ position_x: 720
 position_y: 520
 
 
--name: ennemy1
+-name: enemy1
  position_x: 80
  position_y: 200
  hp: 100
- sprite : "ennemy1_spritefile_path"
- type : "ennemy"
+ sprite : "enemy1_spritefile_path"
+ type : "enemy"
 
--name: ennemy2
+-name: enemy2
  position_x: 120
  position_y: 920
  hp: 5000
- sprite : "ennemy2_spritefile_path"
- type : "ennemy"
+ sprite : "enemy2_spritefile_path"
+ type : "enemy"
 
--name: ennemy3
+-name: enemy3
  position_x: 360
  position_y: 1040
  hp: 90
- sprite : "ennemy3_spritefile_path"
- type : "ennemy"
+ sprite : "enemy3_spritefile_path"
+ type : "enemy"
 
 -name: wall1
  position_x: 0
