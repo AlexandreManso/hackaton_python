@@ -21,6 +21,3 @@ class object(GameObject) :
         gamer.money += object.value
     def draw(object):
         return
-
-class wall(GameObject):
-    def __init__(self):
