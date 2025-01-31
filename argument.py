@@ -5,6 +5,9 @@ from pathlib import Path
 
 #Global constants
 DEFAULT_MAPPING = {"(1,1)" : Path("mappings/mapping1.yml")}
+# Global constants
+DEFAULT_MAPPING = Path("mapping.yml")
+DEFAULT_
 
 
 def read_args() -> argparse.Namespace:
@@ -17,6 +20,7 @@ def read_args() -> argparse.Namespace:
                         default= DEFAULT_MAPPING)
     
     
+     
+
     args = parser.parse_args()
     
-    for 
