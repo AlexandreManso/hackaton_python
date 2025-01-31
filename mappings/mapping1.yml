@@ -1,5 +1,5 @@
 -name: player
-orientation: up
+orientation: Dir.UP
 position_x: 720
 position_y: 520
 

@@ -1,16 +1,18 @@
 from .gameobject import GameObject
 from .direction import Dir
-from .exception import EnnemyEncounter, GameOver
+from .exception import EnemyEncounter, GameOver
 from .Alexandre import Subject, Observer
 
 
 class Gamer(GameObject, Subject, Observer):
 
-    def __init__(self, x, y, hp, dir):
+    def __init__(self, x, y, sprite, hp, dir, player):
         self._hp = hp
         self._inventory = []
         self._position = (y,x)
+        self._sprite = sprite
         self._dir = dir
+        self._player = player
 
     @property
     def dir(self):
@@ -50,26 +52,26 @@ class Gamer(GameObject, Subject, Observer):
         """What to do if a collision is detected."""
 
         # Collided with obstacle
-        if obj.is_obstacle:
+        if isinstance(obj, Wall):
             self._position -= self._dir
 
         # Collided with ennemy
-        if obj.is_enemy:
-            raise EnnemyEncounter
+        if isinstance(obj, Gamer) and not obj._player:
+            raise EnemyEncounter
 
 
-class object(GameObject):
-    def __init__(self, t, p, v):
-        self.type = t
-        self.property = p
-        self.value = v
+class Item(GameObject):
+    def __init__(self, x, y, sprite):
+        self._position = (y,x)
+        self._sprite = sprite
 
-    def potion(object):
-        if object.property == "health":
-            Gamer.hp = min(5, Gamer.hp + object.value)
 
-    def money(object):
-        Gamer.money += object.value
+class Wall(GameObject):
+    def __init__(self, x,y, length, width, sprite):
+        self._position = (y,x)
+        self._length = length
+        self._width = width
+        self._sprite = sprite
 
-    def draw(object):
-        return
+    def is_wall(self):
+        return True

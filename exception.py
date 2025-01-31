@@ -14,7 +14,7 @@ class GameOver(GameException):
         super().__init__("Game over!")
 
 
-class EnnemyEncounter(GameException):
+class EnemyEncounter(GameException):
     """Exception Class used to signal ennemy encounters."""
 
     def __init__(self) -> None:

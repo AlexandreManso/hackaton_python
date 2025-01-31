@@ -7,7 +7,7 @@ import yaml
 
 # Custom imports
 from .Alexandre import Board
-from .Elyesse import Gamer
+from .Elyesse import Gamer, Wall, Item
 from .background import Background
 from .exception import GameOver, EnnemyEncounter
 from .state import State
@@ -64,14 +64,40 @@ class Game:
         # Create the player
         self._gamer = Gamer(x=self._data_room1["player"]["position_x"], 
                             y=self._data_room1["player"]["position_y"], 
-                            hp=self._hp)
+                            sprite = self._data_room1["player"]["sprite"] ,
+                            hp=self._hp, 
+                            dir = self._data_room1["player"]["orientation"],
+                            player=True)
         self._board.add_object(self._gamer)
         # Create background
         self._background = Background(height = self._height,
                                           width = self._width)
         self._board.add_object(self._background)
 
-        # Create objects
+        # Create all other objects
+         
+        for data in self._data_room1_.items():
+            if data['name'].startswith('wall'): 
+                # Instantiate Wall
+                obj = Wall(data['position_x'],
+                           data['position_y'],
+                           data['length'],
+                           data['width'],
+                           data['sprite'])
+                self._board.add_object(obj)
+            elif data['name'].startswith('enemy'): 
+                # Instantiate Enemy
+                obj = Gamer(x=data['position_x'], 
+                            y=data['position_y'], 
+                            hp=data['hp'],
+                            sprite=data['sprite'],
+                            player=False,
+                            dir= None)
+                self._board.add_object(obj)
+            elif data['name'].startswith('object'):  
+                # Instantiate Object
+                obj = Item(data['position_x'], data['position_y'], data['sprite'])
+                self._board.add_object(obj)
 
     def _process_play_event(self, event : pygame.event.Event) -> None:
         """Change the direction of the snake if needed."""
@@ -139,7 +165,7 @@ class Game:
             except GameOver:
                 self._state=State.GAMEOVER
             
-            except EnnemyEncounter:
+            except EnemyEncounter:
                 self._state=State.PLAY_FIGHT 
 
             # Display
